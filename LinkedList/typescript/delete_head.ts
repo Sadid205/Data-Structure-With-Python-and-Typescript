@@ -24,13 +24,19 @@ function insert_at_any(head_container:{head:Node<number>|null},index:number,valu
        if (temp!=null){
             temp = temp.next
        }else{
-        console.log("invalid index!")
+            console.log("invalid index!")
         return 
        }
     }
     if (temp!=null){
         newNode.next = temp.next
         temp.next = newNode
+    }
+}
+
+function delete_head(head_container:{head:Node<number> | null}){
+    if (head_container["head"] != null){
+        head_container["head"] = head_container["head"].next
     }
 }
 
@@ -52,6 +58,7 @@ insert_at_any(head_container,4,5)
 insert_at_any(head_container,5,6)
 insert_at_any(head_container,6,7)
 insert_at_any(head_container,0,10)
-insert_at_any(head_container,33,10)
+delete_head(head_container)
+delete_head(head_container)
 print_node(head_container)
 

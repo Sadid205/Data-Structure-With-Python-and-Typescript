@@ -30,6 +30,12 @@ def insert_at_any(head_container,index,value):
     temp.next = newNode
 
 
+def delete_head(head_container):
+    if head_container["head"] is not None:
+        delete_node = head_container["head"]
+        head_container["head"] = head_container["head"].next
+        del delete_node
+
 def print_node(head_container):
     temp = head_container["head"]
     while temp is not None:
@@ -45,6 +51,7 @@ insert_at_any(head_container,4,4)
 insert_at_any(head_container,5,5)
 insert_at_any(head_container,6,6)
 insert_at_any(head_container,3,8)
-insert_at_any(head_container,22,8)
+delete_head(head_container)
+delete_head(head_container)
 
 print_node(head_container)

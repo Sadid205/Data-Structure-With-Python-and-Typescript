@@ -22,12 +22,28 @@ def insert_at_any(head_container,index,value):
         return 
     
     for i in range(1,index):
-        if temp is None:
-            print("invalid index!")
-            return 
         temp = temp.next
     newNode.next = temp.next
     temp.next = newNode
+
+def delete_at_any(head_container,index):
+    temp = head_container["head"]
+    if index == 0 and temp is not None:
+        delete_head = head_container["head"]
+        head_container["head"] = temp.next
+        del delete_head
+        return 
+
+    for i in range(0,index-1):
+        if temp is None or temp.next is None: 
+            print("invalid index!")
+            return 
+        temp=temp.next
+
+    if temp is not None:
+        delete_node = temp.next  
+        temp.next = temp.next.next
+        del delete_node
 
 
 def print_node(head_container):
@@ -45,6 +61,13 @@ insert_at_any(head_container,4,4)
 insert_at_any(head_container,5,5)
 insert_at_any(head_container,6,6)
 insert_at_any(head_container,3,8)
-insert_at_any(head_container,22,8)
+
+delete_at_any(head_container,0)
+delete_at_any(head_container,6)
+delete_at_any(head_container,2)
+delete_at_any(head_container,22)
+delete_at_any(head_container,4)
+
+
 
 print_node(head_container)
