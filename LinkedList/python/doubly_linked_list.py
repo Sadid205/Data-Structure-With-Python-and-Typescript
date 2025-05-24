@@ -35,7 +35,6 @@ class DoublyLinkedList:
         self.head = newNode
         
     def insert_at_any(self,value,index):
-        print("hei")
         temp = self.head
         newNode = Node(value)
 
@@ -53,6 +52,7 @@ class DoublyLinkedList:
             if temp is None:
                 print("invalid index!")
                 return
+
         if temp.next == None:
             self.insert_at_tail(value)
             return
@@ -76,9 +76,9 @@ while True:
     i+=1
 # newDoublyLinkedList.print_node()
 newDoublyLinkedList.insert_at_head(10)
-newDoublyLinkedList.insert_at_any(56,3)
-newDoublyLinkedList.insert_at_any(100,5)
-newDoublyLinkedList.insert_at_any(100,6)
+newDoublyLinkedList.insert_at_any(578,4)
+# newDoublyLinkedList.insert_at_any(100,5)
+# newDoublyLinkedList.insert_at_any(100,6)
 
 
 # newDoublyLinkedList.insert_at_any(100,11)
