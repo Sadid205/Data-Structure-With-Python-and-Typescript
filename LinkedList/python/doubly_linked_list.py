@@ -18,7 +18,6 @@ class DoublyLinkedList:
             temp = temp.next
 
     def insert_at_tail(self,value):
-        print("tail")
         newNode = Node(value)
         if self.head == None:
             self.head = newNode
@@ -30,6 +29,10 @@ class DoublyLinkedList:
     
     def insert_at_head(self,value):
         newNode = Node(value)
+        if self.head == None:
+            self.head = newNode
+            self.tail = newNode
+            return
         newNode.next = self.head
         self.head.prev = newNode
         self.head = newNode
@@ -60,6 +63,56 @@ class DoublyLinkedList:
         newNode.prev = temp
         temp.next.prev = newNode
         temp.next = newNode
+
+    def delete_head(self):
+        deleteNode = self.head 
+        if self.head.next != None:
+            self.head.next.prev = None
+            self.head = self.head.next
+            del deleteNode
+            return
+
+        self.head = self.head.next
+        del deleteNode
+        return
+    
+    def delete_tail(self):
+        deleteNode = self.tail
+        if self.tail.prev != None:
+            self.tail.prev.next = None
+            self.tail = self.tail.prev
+            del deleteNode
+            return
+        self.tail = self.tail.prev
+        del deleteNode
+        return
+
+            
+    def delete_at_any(self,index):
+        temp = self.head
+        if temp == None:
+            return
+        if index == 0:
+            self.delete_head()
+        
+        for i in range(1,index):
+            temp = temp.next
+            if temp is None:
+                print("invalid index!")
+                return
+        if temp.next == None:
+            print('invalid index')
+            return
+        if temp.next.next == None:
+            self.delete_tail()
+            return
+
+        deleteNode = temp.next
+        temp.next = temp.next.next
+        temp.next.next.prev = temp
+        del deleteNode
+        return
+
     
 
 head_container = {"head":None}
@@ -76,13 +129,16 @@ while True:
     i+=1
 # newDoublyLinkedList.print_node()
 newDoublyLinkedList.insert_at_head(10)
-newDoublyLinkedList.insert_at_any(578,4)
-# newDoublyLinkedList.insert_at_any(100,5)
-# newDoublyLinkedList.insert_at_any(100,6)
+newDoublyLinkedList.insert_at_any(578,3)
+newDoublyLinkedList.insert_at_any(100,4)
+newDoublyLinkedList.insert_at_any(1067,5)
 
 
 # newDoublyLinkedList.insert_at_any(100,11)
 # newDoublyLinkedList.insert_at_any(100,10)
 # newDoublyLinkedList.insert_at_any(100,12)
-newDoublyLinkedList.print_node()
 # print(newDoublyLinkedList.tail.value)
+newDoublyLinkedList.delete_head()
+newDoublyLinkedList.delete_tail()
+newDoublyLinkedList.delete_at_any(0)
+newDoublyLinkedList.print_node()
