@@ -42,6 +42,27 @@ function print_node_reverse(head:Node<number>|null){
     process.stdout.write(temp.value + " ")
 }
 
+function print_node(head_container:{head:Node<number>|null}){
+    let temp:Node<number> | null = head_container["head"]
+    while (temp!=null){
+        process.stdout.write(temp.value + " ")
+        temp=temp.next
+    }
+    console.log()
+}
+
+function print_reverse(head_container:{head:Node<number>|null},curr:Node<number> | null){
+    if (curr?.next === null){
+        head_container["head"] = curr
+        return
+    }
+    if(curr?.next !=null ){
+        print_reverse(head_container,curr?.next)
+        curr.next.next = curr
+        curr.next = null
+    }
+}
+
 let head_container = {"head":null}
 
 rl.on('close',()=>{
@@ -55,7 +76,9 @@ rl.on('close',()=>{
         }
         i++
     }
-    print_node_reverse(head_container["head"])
+    // print_node_reverse(head_container["head"])
+    print_reverse(head_container,head_container["head"])
+    print_node(head_container)
     console.log()
 })
 
