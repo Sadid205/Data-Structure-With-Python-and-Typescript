@@ -10,6 +10,21 @@ class DoublyLinkedList:
     def __init__(self,head):
         self.head = head
         self.tail = head
+
+    def reverse(self):
+        i = self.head
+        j = self.tail
+        while i!=j and i.next != j:
+            temp = i.value
+            i.value = j.value
+            j.value = temp
+            i = i.next
+            j = j.prev
+        temp2 = i.value
+        i.value = j.value
+        j.value = temp2
+
+            
     
     def print_node(self):
         temp = self.head
@@ -109,8 +124,8 @@ class DoublyLinkedList:
             return
 
         deleteNode = temp.next
-        temp.next = temp.next.next
         temp.next.next.prev = temp
+        temp.next = temp.next.next
         del deleteNode
         return
 
@@ -141,5 +156,10 @@ newDoublyLinkedList.insert_at_any(1067,5)
 # print(newDoublyLinkedList.tail.value)
 newDoublyLinkedList.delete_head()
 newDoublyLinkedList.delete_tail()
-newDoublyLinkedList.delete_at_any(0)
+newDoublyLinkedList.delete_at_any(3)
 newDoublyLinkedList.print_node()
+print()
+newDoublyLinkedList.reverse()
+newDoublyLinkedList.print_node()
+# 5 44 578 1067 56 
+# 56 1067 578 44 5

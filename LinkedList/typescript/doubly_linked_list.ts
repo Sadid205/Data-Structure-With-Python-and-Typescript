@@ -39,6 +39,24 @@ class DoublyLinkedList <T> {
         }
         console.log()
     }
+    reverse():void{
+        let i = this.head
+        let j = this.tail
+        while(i && j && i!=j && i?.next!=j){
+            const temp = i.value
+                i.value = j.value
+                j.value = temp
+                i = i.next
+                j = j.prev
+        }
+        if(i && j){
+            const temp2 = i.value
+            i.value = j.value
+            j.value = temp2
+        }
+    }
+    
+
     insert_at_tail(value:T){
         const newNode = new Node(value)
         if (this.head == null){
@@ -151,9 +169,9 @@ class DoublyLinkedList <T> {
             this.delete_tail()
             return
         }
-        temp.next = temp.next.next
         if(temp.next.next!=null){
             temp.next.next.prev = temp
+            temp.next = temp.next.next
         }
         return
     }
@@ -184,6 +202,9 @@ rl.on('close',()=>{
     newDoublyLinkedList.delete_tail()
     newDoublyLinkedList.delete_at_any(5)
     newDoublyLinkedList.delete_at_any(0)
-    newDoublyLinkedList.delete_at_any(2)
+    newDoublyLinkedList.print_node()
+    newDoublyLinkedList.reverse()
     newDoublyLinkedList.print_node()
 })
+// 5 495 44 72 6734 93
+// 93 6734 72 44 495 5
