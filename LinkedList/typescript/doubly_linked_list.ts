@@ -47,7 +47,7 @@ class DoublyLinkedList <T> {
             return
         }
         newNode.prev = this.tail
-        if (this.tail!=null && this.tail.next != null){
+        if (this.tail!=null){
             this.tail.next = newNode
             this.tail = newNode
         }
@@ -60,7 +60,7 @@ class DoublyLinkedList <T> {
             return
         }
         newNode.next = this.head
-        if(this.head!=null && this.head.prev != null){
+        if(this.head!=null){
             this.head.prev = newNode
             this.head = newNode
             return
@@ -100,5 +100,90 @@ class DoublyLinkedList <T> {
             temp.next = newNode
         }
     }
-
+    delete_head(){
+        const delete_node = this.head
+        if(this.head?.next != null){
+            this.head.next.prev = null
+            this.head = this.head.next
+            return
+        }
+        if(this.head!=null){
+            this.head = this.head.next
+            return
+        }
+    }
+    delete_tail(){
+        const deleteNode = this.tail
+        if(this.tail?.prev != null){
+            this.tail.prev.next = null
+            this.tail = this.tail.prev
+            return
+        }
+        if(this.tail!=null){
+            this.tail = this.tail.prev
+            return
+        }
+    }
+    delete_at_any(index:number){
+        let temp = this.head
+        if (temp===null){
+            console.log("head is null!")
+            return
+        }
+        if(index===0){
+            this.delete_head()
+            return
+        }
+        for(let i:number=1;i<index;i++){
+            if(temp!=null){
+                temp = temp?.next
+            }
+            if(temp===null){
+                console.log('invalid index!')
+                return
+            }
+        }
+        if(temp.next==null){
+            console.log('invalid index')
+            return
+        }
+        if(temp.next.next === null){
+            this.delete_tail()
+            return
+        }
+        temp.next = temp.next.next
+        if(temp.next.next!=null){
+            temp.next.next.prev = temp
+        }
+        return
+    }
 }
+
+let head_container = {"head":null}
+const newDoublyLinkedList = new DoublyLinkedList<number>(head_container["head"])
+
+rl.on('close',()=>{
+    const a = input_data.split(" ").map(Number)
+    let i = 0
+    while(true){
+        if(a[i]!=-1){
+            newDoublyLinkedList.insert_at_tail(a[i])
+        }else{
+            break
+        }
+        i++
+    }
+    console.log(a)
+    newDoublyLinkedList.insert_at_tail(3)
+    newDoublyLinkedList.insert_at_head(49)
+    newDoublyLinkedList.insert_at_any(495,2)
+    newDoublyLinkedList.insert_at_any(944,0)
+    newDoublyLinkedList.insert_at_any(72,5)
+    newDoublyLinkedList.insert_at_any(6734,7)
+    newDoublyLinkedList.delete_head()
+    newDoublyLinkedList.delete_tail()
+    newDoublyLinkedList.delete_at_any(5)
+    newDoublyLinkedList.delete_at_any(0)
+    newDoublyLinkedList.delete_at_any(2)
+    newDoublyLinkedList.print_node()
+})

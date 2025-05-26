@@ -94,6 +94,7 @@ class DoublyLinkedList:
             return
         if index == 0:
             self.delete_head()
+            return
         
         for i in range(1,index):
             temp = temp.next
