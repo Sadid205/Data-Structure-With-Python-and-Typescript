@@ -20,3 +20,4 @@ function deleteNode(node: ListNode | null): void {
         node.val = next_val
     }
 };
+
